@@ -24,7 +24,7 @@ app.add_middleware(
 )
 
 # Load model and DB
-model = SentenceTransformer("paraphrase-MiniLM-L3-v2",device="cpu")
+model = SentenceTransformer("all-MiniLM-L6-v2")
 chroma_client = chromadb.PersistentClient(path="vector_db/chroma_store")
 collection = chroma_client.get_collection(name="architect_knowledge")
 groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
@@ -44,7 +44,7 @@ async def chat(request: ChatRequest):
 
     # 1. Embed and retrieve from Chroma
     query_vector = model.encode(user_input).tolist()
-    results = collection.query(query_embeddings=[query_vector], n_results=2)
+    results = collection.query(query_embeddings=[query_vector], n_results=3)
     context = "\n\n".join(results["documents"][0])
 
     # 2. Build full chat prompt
@@ -52,7 +52,7 @@ async def chat(request: ChatRequest):
         {"role": "system", "content": "You are a helpful real estate architect assistant. Use only the context provided to answer user queries. Be accurate, helpful, and detail-oriented."}
     ]
 
-    for turn in chat_history[-3:]:
+    for turn in chat_history[-5:]:
         messages.append({"role": "user", "content": turn["user"]})
         messages.append({"role": "assistant", "content": turn["bot"]})
 
