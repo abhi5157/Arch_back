@@ -1,0 +1,79 @@
+v/ 
+node_modules
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+data
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# Database files
+*.sqlite3
+*.db
+
+# Python egg
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Coverage reports
+.coverage
+htmlcov/
+*.cover
+*.py,cover
+
+# Test and debug tools
+.cache/
+pytest_cache/
+nosetests.xml
+coverage.xml
+.tox/
+
+# Misc
+*.bak
+*.tmp
+*.swp
+
+uvicorn main:app --host 0.0.0.0 --port 8443 \
+  --ssl-keyfile ../key.pem \
+  --ssl-certfile ../cert.pem
+
+sudo kill -9 12345
+
+sudo lsof -i :8000
+
+nohup uvicorn main:app --host 0.0.0.0 --port 8000 > server.log 2>&1 &
+(v) ubuntu@ip-172-31-81-149:~/Arch_back$ uvicorn main:app --host 0.0.0.0 --port 8000 \
+  --ssl-keyfile ../key.pem \
+  --ssl-certfile ../cert.pem
+INFO:     Started server process [5053]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 98] error while attempting to bind on address ('0.0.0.0', 8000): address already in use
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.

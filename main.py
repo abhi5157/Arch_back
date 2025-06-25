@@ -35,6 +35,10 @@ chat_history = []
 class ChatRequest(BaseModel):
     message: str
 
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Chat API"}
+
 @app.post("/chat")
 async def chat(request: ChatRequest):
     user_input = request.message
