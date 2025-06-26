@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 cd "$(dirname "$0")"
 echo"$(pwd)"
 source v/bin/activate
